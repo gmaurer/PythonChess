@@ -20,20 +20,22 @@ class WKing(Board):
         self.color = "White"
         self.positionX = 0
         self.positionY = 3
-        self.sets = self.moveSet()
+        self.set = self.moveSet()
 
     def moveSet(self):
-        sets = {}
-        sets[self.positionX+1] = self.positionY+1
-        sets[self.positionX] = self.positionY+1
-        sets[self.positionX+1] = self.positionY
-        sets[self.positionX-1] = self.positionY-1
-        sets[self.positionX-1] = self.positionY+1
-        sets[self.positionX+1] = self.positionY-1
-        sets[self.positionX-1] = self.positionY
-        sets[self.positionX] = self.positionY-1
+        #use sets instead
+        x = self.positionX
+        y = self.positionY
+        sets = set()
+        sets.add((x+1,y))
+        sets.add((x-1,y))
+        sets.add((x,y+1))
+        sets.add((x,y-1))
+        sets.add((x+1,y+1))
+        sets.add((x+1,y-1))
+        sets.add((x-1,y+1))
+        sets.add((x-1,y-1))
 
-        print(sets)
         return sets
 
 
@@ -48,17 +50,20 @@ class Go(Board):
 
     def __init__(self):
 
-        WKing.__init__(self)
-        Pieces.__init__(self)
+        self.wKing = WKing()
+        self.pieces = Pieces()
         super().__init__()
 
 def move(self,piece):
     while True:
         try:
-            #print(self.board[xPos,yPos])
             xPos = input("Put x position in: ")
             yPos = input("Put y position in: ")
-            if self.board[int(xPos),int(yPos)] == 0:
+            tupleCheck = (int(xPos),int(yPos))
+
+            if self.board[int(xPos),int(yPos)
+                        ] == 0 and tupleCheck in self.wKing.set:
+
                 self.positionX = int(xPos)
                 self.positionY = int(yPos)
                 print("fair move")
