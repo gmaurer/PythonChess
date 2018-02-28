@@ -4,8 +4,11 @@ class Board:
     def __init__(self):
         self.board = self.createBoard()
 
+
     def createBoard(self):
-        return np.zeros((8,8))
+        npBoard = np.zeros((8,8))
+        setPieces(npBoard)
+        return npBoard
 
 
 
@@ -47,7 +50,7 @@ class Go(Board):
         piece = input("Piece to move: ")
         if piece == "WKing":
             move(self,self.wKing)
-            checkLocation(self,self.positionX,self.positionY)
+            checkLocation(self,self.wKing.positionX,self.wKing.positionY)
 
         else:
             print("wrong piece")
@@ -57,6 +60,9 @@ class Go(Board):
         self.wKing = WKing()
         self.pieces = Pieces()
         super().__init__()
+def setPieces(b):#will do this cleaner
+    b[7,3] = 6
+    b[0,3] = 6 #Kings
 
 def move(self,piece):
     while True:
@@ -69,9 +75,12 @@ def move(self,piece):
             if self.board[int(xPos),int(yPos)
                         ] == 0 and tupleCheck in piece.set:
 
-                self.positionX = int(xPos)
-                self.positionY = int(yPos)
-                self.board[self.positionX,self.positionY] = piece.character
+                tempX = piece.positionX
+                tempY = piece.positionY
+                piece.positionX = int(xPos)
+                piece.positionY = int(yPos)
+                self.board[piece.positionX,piece.positionY] = piece.character
+                self.board[tempX,tempY] = 0
                 print(self.board)
                 print("fair move")
                 break
